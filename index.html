@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On This Day in St. Charles County History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'EB Garamond', serif;
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(rgba(245, 240, 225, 0.92), rgba(245, 240, 225, 0.75)),
+                        url('https://images.pexels.com/photos/247671/pexels-photo-247671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat fixed;
+            background-blend-mode: overlay;
+            color: #3c2f2f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #fact-container {
+            max-width: 720px;
+            width: 100%;
+            background: #f9f5e8;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(60, 47, 47, 0.15),
+                        inset 0 0 40px rgba(139, 69, 19, 0.08);
+            position: relative;
+            border: 1px solid rgba(139, 69, 19, 0.15);
+            box-sizing: border-box;
+        }
+        /* --- Logo, top-left corner --------------------------------------
+           Replace the src below with the real St. Charles County logo file
+           once you have it (e.g. "stcharles-logo.png" sitting in the same
+           folder as this HTML file, or a hosted URL). */
+        #county-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            max-width: 90px;
+            max-height: 90px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            color: #8b4513;
+            margin: 0 0 0.5rem;
+            text-align: center;
+            padding: 0 10px;
+        }
+        #date-header {
+            font-size: 1.6rem;
+            color: #5c4033;
+            text-align: center;
+            margin: 0 0 1.8rem;
+            font-style: italic;
+        }
+        #fact {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            margin: 1.5rem 0 2rem;
+            color: #2f1f0f;
+            min-height: 3rem;
+        }
+        #switch-link {
+            text-align: center;
+            margin: 1.5rem 0 2rem;
+        }
+        #switch-link a {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.05rem;
+            color: #8b4513;
+            text-decoration: none;
+            border: 1px solid #8b4513;
+            border-radius: 6px;
+            padding: 8px 18px;
+            display: inline-block;
+        }
+        #switch-link a:hover {
+            background: #8b4513;
+            color: #fffef0;
+        }
+        #epoch-link {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 1rem;
+        }
+        #epoch-link a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        #epoch-link a:hover {
+            color: #004499;
+        }
+        #loading {
+            font-size: 1.3rem;
+            color: #6b5e4e;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        footer {
+            font-size: 1rem;
+            color: #6b5e4e;
+            text-align: center;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(139, 69, 19, 0.15);
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="fact-container">
+        <img id="county-logo" src="stcharles-logo.png" alt="St. Charles County Logo"
+             onerror="this.style.display='none'">
+
+        <h1>On This Day in St. Charles County History</h1>
+        <div id="date-header"></div>
+
+        <p id="fact"></p>
+        <div id="loading">Loading today's history...</div>
+
+        <div id="switch-link">
+            <a href="index.html">Switch to Worldwide "On This Day"</a>
+        </div>
+
+        <div id="epoch-link">
+            <a href="https://www.epoch-us.com" target="_blank">Epoch</a>
+        </div>
+
+        <footer>
+            <p>Tap your Epoch bracelet again for a new fact!<br>
+            Come back tomorrow for fresh moments from St. Charles County's history.</p>
+            <small>
+                © 2026 Epoch. All original content reserved.
+            </small>
+        </footer>
+    </div>
+
+    <script>
+        // Surface any script error directly on the page — helpful for
+        // debugging on a phone (via NFC tap) where dev tools aren't available.
+        window.addEventListener('error', (e) => {
+            const factEl = document.getElementById('fact');
+            const loadingEl = document.getElementById('loading');
+            if (loadingEl) loadingEl.style.display = 'none';
+            if (factEl) factEl.innerHTML = `<strong>Something went wrong loading this page.</strong><br><small>${e.message}</small>`;
+        });
+
+        // ------------------------------------------------------------------
+        // ST. CHARLES COUNTY FACTS — fill this in once the client sends the
+        // full set of 365 (or 366, for leap years) facts.
+        //
+        // Key format: "M-D" (month-day, NO leading zeros) e.g. "1-1", "8-3", "12-25"
+        // Value: { year: "YYYY" (or era string), text: "The fact itself" }
+        //
+        // Only a few sample entries are filled in below so you can see the
+        // page working right now. Everything else falls back to a friendly
+        // "coming soon" message until you add more entries.
+        // ------------------------------------------------------------------
+        const STCHARLES_FACTS = {
+            "1-1":  { year: "1769", text: "Louis Blanchette establishes a trading post that becomes the settlement of St. Charles." },
+            "6-4":  { year: "1804", text: "The Lewis and Clark Expedition departs from St. Charles, its last stop before heading up the Missouri River." },
+            "8-3":  { year: "1821", text: "St. Charles briefly serves as the first capital of the new state of Missouri." },
+            "12-25": { year: "1850", text: "Placeholder holiday entry — replace with a real St. Charles County fact for December 25." }
+            // Add the remaining ~361 entries here in the same format, e.g.:
+            // "8-4": { year: "1900", text: "..." },
+        };
+
+        const now = new Date();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const monthName = now.toLocaleString('default', { month: 'long' });
+        const dateKey = `${month}-${day}`;
+
+        document.getElementById('date-header').textContent = `On this day, ${monthName} ${day}, in St. Charles County...`;
+
+        function displayFact() {
+            const factEl = document.getElementById('fact');
+            const loadingEl = document.getElementById('loading');
+            loadingEl.style.display = 'none';
+
+            const entry = STCHARLES_FACTS[dateKey];
+            if (entry) {
+                factEl.innerHTML = `In <strong>${entry.year}</strong>: ${entry.text}`;
+            } else {
+                factEl.innerHTML = `<strong>St. Charles County's fact for today is coming soon!</strong><br>` +
+                    `<small>We're still filling in the full 365-day calendar — check back as more local history gets added.</small>`;
+            }
+        }
+
+        displayFact();
+    </script>
+</body>
+</html>
